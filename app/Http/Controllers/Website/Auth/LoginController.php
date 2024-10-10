@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Website\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\Auth\LoginRequest;
-use App\Http\Resources\Website\UserResource;
+use App\Http\Resources\UserResource;
+
 
 class LoginController extends Controller
 {
