@@ -45,12 +45,6 @@ class LoginRequest extends FormRequest
             ], 401);
         }
 
-        if (auth()->user()->is_blocked) {
-            return response()->json([
-                'message' => 'Your Account is blocked. Please contact support.',
-            ], 401);
-        }
-
         $this->session()->regenerate();
 
         return [
