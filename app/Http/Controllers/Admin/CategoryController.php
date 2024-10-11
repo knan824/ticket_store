@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $category = $request->updateOrganizer();
+        $category = $request->updateCategory();
 
         return response([
             'message' => 'category updated successfully',

@@ -23,16 +23,15 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|min:8|max:50',
+            'name' => 'sometimes|string|min:3|max:50|unique:categories,name',
         ];
     }
 
     public function updateCategory()
     {
-        return DB::transaction(function () {
-            $this->category->update([
-                'name' => $this->name,
-            ]);
-        });
+        $this->category->update([
+            'name' => $this->name,
+        ]);
+        return $this->category->refresh();
     }
 }
