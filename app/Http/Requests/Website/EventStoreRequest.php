@@ -24,9 +24,9 @@ class EventStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min=8|max=50',
-            'address' => 'required|string|min=8|max=50',
-            'time' => 'required|date|date_format:Y-m-d|',
+            'name' => 'required|string|min:8|max:50',
+            'address' => 'required|string|min:8|max:50',
+            'time' => 'required|date|date_format:Y-m-d|after:today|unique:events,time',
         ];
     }
 

@@ -23,9 +23,9 @@ class TicketUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'sometimes|string|min=4|max=50',
-            'price' => 'sometimes|integer|min=0|max=50000',
-            'quantity' => 'sometimes|integer|min=1|max=100000',
+            'type' => 'sometimes|string|min:4|max:50',
+            'price' => 'sometimes|integer|min:0|max:50000',
+            'quantity' => 'sometimes|integer|min:1|max:100000',
         ];
     }
 

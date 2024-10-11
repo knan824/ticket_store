@@ -23,9 +23,9 @@ class EventUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|min=8|max=50',
-            'address' => 'sometimes|string|min=8|max=50',
-            'time' => 'sometimes|date|date_format:Y-m-d|',
+            'name' => 'sometimes|string|min:8|max:50',
+            'address' => 'sometimes|string|min:8|max:50',
+            'time' => 'sometimes|date|date_format:Y-m-d|after:today|unique:events,time'. $this->event->time,
         ];
     }
 

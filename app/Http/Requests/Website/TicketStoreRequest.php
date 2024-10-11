@@ -24,9 +24,9 @@ class TicketStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'required|string|min=4|max=50',
-            'price' => 'required|integer|min=0|max=50000',
-            'quantity' => 'required|integer|min=1|max=100000',
+            'type' => 'required|string|min:4|max:50',
+            'price' => 'required|integer|min:0|max:50000',
+            'quantity' => 'required|integer|min:1|max:100000',
         ];
     }
 
