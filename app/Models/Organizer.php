@@ -17,4 +17,9 @@ class Organizer extends Model
     {
         return $this->belongsToMany(Event::class);
     }
+
+    public function medias()
+    {
+        return $this->morphMany(Media::class, 'mediable');
+    }
 }
