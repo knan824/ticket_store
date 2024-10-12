@@ -15,4 +15,19 @@ class Event extends Model
         'address',
         'time',
     ];
+
+    public function tickets()
+    {
+        return $this->belongsToMany(Ticket::class);
+    }
+
+    public function organizers()
+    {
+        return $this->belongsToMany(Organizer::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

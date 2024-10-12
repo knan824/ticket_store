@@ -14,4 +14,14 @@ class Ticket extends Model
         'price',
         'quantity',
     ];
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

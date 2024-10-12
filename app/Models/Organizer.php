@@ -12,4 +12,9 @@ class Organizer extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }
