@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -29,5 +30,15 @@ class Event extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function remove()
+    {
+        return DB::transaction(function () {
+            $this->tickets()->delete();
+            $this->organizers()->detach();
+            $this->categories()->detach();
+            $this->delete();
+        });
     }
 }

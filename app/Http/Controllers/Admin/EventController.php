@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::paginate();
+        $events = Event::with(['tickets', 'categories', 'organizers'])->paginate();
 
         return EventResource::collection($events);
     }
@@ -61,7 +61,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        $event->delete();
+        $event->remove();
 
         return response([
             'message' => 'event removed successfully',
