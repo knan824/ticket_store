@@ -26,7 +26,7 @@ class EventStoreRequest extends FormRequest
         return [
             'name' => 'required|string|min:8|max:50',
             'address' => 'required|string|min:8|max:50',
-            'time' => 'required|date|date_format:Y-m-d|after:today|unique:events,time',
+            'time' => 'required|date|date_format:Y-m-d|after:today',
         ];
     }
 

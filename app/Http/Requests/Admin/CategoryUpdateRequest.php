@@ -32,6 +32,7 @@ class CategoryUpdateRequest extends FormRequest
         $this->category->update([
             'name' => $this->name,
         ]);
+
         return $this->category->refresh();
     }
 }

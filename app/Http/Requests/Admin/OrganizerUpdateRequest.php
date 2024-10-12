@@ -23,7 +23,7 @@ class OrganizerUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|min:8|max:50',
+            'name' => 'sometimes|string|min:3|max:50|unique:organizers,name',
         ];
     }
 
@@ -33,6 +33,8 @@ class OrganizerUpdateRequest extends FormRequest
             $this->organizer->update([
                 'name' => $this->name,
             ]);
+
+            return $this->organizer->refresh();
         });
     }
 }

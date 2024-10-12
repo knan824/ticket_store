@@ -37,6 +37,8 @@ class TicketUpdateRequest extends FormRequest
                 'price' => $this->price,
                 'quantity' => $this->quantity,
             ]);
+
+            return $this->ticket->refresh();
         });
     }
 }
