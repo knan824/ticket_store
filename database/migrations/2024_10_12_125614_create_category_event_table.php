@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('category_event', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('event_id');
+            $table->timestamps();
         });
     }
 

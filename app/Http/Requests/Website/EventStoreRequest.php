@@ -27,12 +27,21 @@ class EventStoreRequest extends FormRequest
             'name' => 'required|string|min:8|max:50',
             'address' => 'required|string|min:8|max:50',
             'time' => 'required|date|date_format:Y-m-d|after:today',
+            'category' => 'required|array|min:1',
+            'category.*' => 'integer|exists:categories,id|required_with:category',
+            'organizer' => 'required|array|min:1',
+            'organizer.*' => 'integer|exists:organizers,id|required_with:organizer',
+            'ticket' => 'required|array|min:1',
+            'ticket.*' => 'integer|exists:tickets,id|required_with:ticket',
         ];
     }
 
     public function storeEvent(){
         return DB::transaction(function () {
             $event = Event::create($this->validated());
+            $event->categories()->attach($this->category);
+            $event->organizers()->attach($this->organizer);
+            $event->tickets()->attach($this->ticket);
 
             return $event;
         });

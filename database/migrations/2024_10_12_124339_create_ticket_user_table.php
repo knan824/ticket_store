@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('ticket_user', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ticket_id');
+            $table->timestamps();
         });
     }
 
