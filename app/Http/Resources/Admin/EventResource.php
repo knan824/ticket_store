@@ -22,6 +22,7 @@ class EventResource extends JsonResource
             'categories' => CategoryResourse::collection($this->categories),
             'organizers' => OrganizerResourse::collection($this->organizers),
             'tickets' => TicketResourse::collection($this->tickets),
+            'image' => ImageResource::make($this->image),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

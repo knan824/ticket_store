@@ -32,15 +32,16 @@ class Event extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function medias()
+    public function image()
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphOne(Image::class, 'mediable');
     }
 
     public function remove()
     {
         return DB::transaction(function () {
             $this->tickets()->delete();
+            $this->image()->delete();
             $this->organizers()->detach();
             $this->categories()->detach();
             $this->delete();

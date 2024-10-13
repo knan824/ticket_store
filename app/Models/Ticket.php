@@ -24,9 +24,4 @@ class Ticket extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
-    public function medias()
-    {
-        return $this->morphMany(Media::class, 'mediable');
-    }
 }

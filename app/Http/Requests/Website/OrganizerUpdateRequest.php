@@ -4,6 +4,7 @@ namespace App\Http\Requests\Website;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrganizerUpdateRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ class OrganizerUpdateRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|string|min:3|max:50|unique:organizers,name',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
@@ -34,6 +36,19 @@ class OrganizerUpdateRequest extends FormRequest
                 'name' => $this->name,
             ]);
 
+            if ($this->exists('image')) {
+                Storage::delete($this->organizer->image->path);
+                $this->organizer->image()->delete();
+
+                $path = $this->image->store('organizers');
+                $this->organizer->image()->create([
+                    'path' => $path,
+                    'is_main' => true,
+                    'extension' => $this->image->extension(),
+                    'size' => $this->image->getSize(),
+                    'type' => 'photo',
+                ]);
+            }
             return $this->organizer->refresh();
         });
     }

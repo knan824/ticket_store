@@ -15,7 +15,7 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        $organizers = Organizer::paginate();
+        $organizers = Organizer::with(['image'])->paginate();
 
         return OrganizerResourse::collection($organizers);
     }
@@ -61,7 +61,7 @@ class OrganizerController extends Controller
      */
     public function destroy(Organizer $organizer)
     {
-        $organizer->delete();
+        $organizer->remove();
 
         return response([
             'message' => 'organizer removed successfully',

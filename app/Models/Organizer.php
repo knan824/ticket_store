@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Organizer extends Model
 {
@@ -18,8 +19,17 @@ class Organizer extends Model
         return $this->belongsToMany(Event::class);
     }
 
-    public function medias()
+    public function image()
     {
-        return $this->morphMany(Media::class, 'mediable');
+        return $this->morphOne(Image::class, 'mediable');
+    }
+
+    public function remove()
+    {
+        return DB::transaction(function () {
+            $this->image()->delete();
+            $this->events()->detach();
+            $this->delete();
+        });
     }
 }

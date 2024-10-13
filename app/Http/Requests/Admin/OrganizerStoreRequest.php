@@ -24,13 +24,24 @@ class OrganizerStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:4|max:50|unique:organizers,name',
+            'name' => 'required|string|min:3|max:50|unique:organizers,name',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
     public function storeOrganizer(){
         return DB::transaction(function () {
             $organizer = Organizer::create($this->validated());
+
+            $path = $this->image->store('organizers');
+
+            $organizer->image()->create([
+                'path' => $path,
+                'is_main' => true,
+                'extension' => $this->image->extension(),
+                'size' => $this->image->getSize(),
+                'type' => 'photo',
+            ]);
 
             return $organizer;
         });

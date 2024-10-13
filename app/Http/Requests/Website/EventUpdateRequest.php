@@ -4,6 +4,7 @@ namespace App\Http\Requests\Website;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EventUpdateRequest extends FormRequest
 {
@@ -32,6 +33,7 @@ class EventUpdateRequest extends FormRequest
             'organizer.*' => 'integer|exists:organizers,id|required_with:organizer',
             'ticket' => 'sometimes|array|min:1',
             'ticket.*' => 'integer|exists:tickets,id|required_with:ticket',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
@@ -46,6 +48,20 @@ class EventUpdateRequest extends FormRequest
             $this->event->categories()->sync($this->category);
             $this->event->organizers()->sync($this->organizer);
             $this->event->tickets()->sync($this->ticket);
+
+            if ($this->exists('image')) {
+                Storage::delete($this->event->image->path);
+                $this->event->image()->delete();
+
+                $path = $this->image->store('events');
+                $this->event->image()->create([
+                    'path' => $path,
+                    'is_main' => true,
+                    'extension' => $this->image->extension(),
+                    'size' => $this->image->getSize(),
+                    'type' => 'photo',
+                ]);
+            }
 
             return $this->event->refresh();
         });

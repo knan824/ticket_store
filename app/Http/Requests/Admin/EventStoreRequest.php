@@ -33,6 +33,7 @@ class EventStoreRequest extends FormRequest
             'organizer.*' => 'integer|exists:organizers,id|required_with:organizer',
             'ticket' => 'required|array|min:1',
             'ticket.*' => 'integer|exists:tickets,id|required_with:ticket',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
@@ -41,6 +42,16 @@ class EventStoreRequest extends FormRequest
         $event->categories()->attach($this->category);
         $event->organizers()->attach($this->organizer);
         $event->tickets()->attach($this->ticket);
+
+        $path = $this->image->store('events');
+
+        $event->image()->create([
+            'path' => $path,
+            'is_main' => true,
+            'extension' => $this->image->extension(),
+            'size' => $this->image->getSize(),
+            'type' => 'photo',
+        ]);
 
         return $event;
     }
