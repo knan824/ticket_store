@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('type');
             $table->integer('price');
             $table->integer('quantity');
+            $table->timestamps();
         });
     }
 

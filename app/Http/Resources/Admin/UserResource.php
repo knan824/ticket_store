@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Website;
+namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TicketResourse extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class TicketResourse extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => $this->type,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'email_verified_at' => $this->email_verified_at,
         ];
     }
 }
