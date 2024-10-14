@@ -10,6 +10,11 @@ use App\Models\Organizer;
 
 class OrganizerController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Organizer::class, 'organizer');
+    }
+
     /**
      * Display a listing of the resource.
      */

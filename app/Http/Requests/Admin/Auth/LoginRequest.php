@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Website\Auth;
+namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -49,7 +49,7 @@ class LoginRequest extends FormRequest
 
         return [
             'user' => auth()->user(),
-            'token' => auth()->user()->createToken('user')->plainTextToken,
+            'token' => auth()->user()->createToken('admin')->plainTextToken,
         ];
     }
 }

@@ -26,7 +26,6 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:50'],
-            'username' => ['required', 'string', 'min:6', 'max:50', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed', Password::defaults()],
         ];
@@ -36,7 +35,6 @@ class RegisterRequest extends FormRequest
     {
         $user = User::create([
             'name' => $this->name,
-            'username' => $this->username,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
@@ -45,7 +43,7 @@ class RegisterRequest extends FormRequest
 
         return [
             'user' => $user,
-            'token' => $user->createToken('api_token')->plainTextToken,
+            'token' => $user->createToken('user')->plainTextToken,
         ];
     }
 }

@@ -10,6 +10,11 @@ use App\Models\Ticket;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+    $this->authorizeResource(Ticket::class, 'ticket');
+    }
+
     /**
      * Display a listing of the resource.
      */
