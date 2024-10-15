@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_user', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('ticket_id');
-            $table->uuid('serial_number');
             $table->timestamps();
+            $table->uuid("serial_number");
+            $table->boolean("is_paid");
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_user');
+        Schema::dropIfExists('purchases');
     }
 };
