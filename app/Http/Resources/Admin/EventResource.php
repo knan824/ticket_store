@@ -19,6 +19,7 @@ class EventResource extends JsonResource
             'name' => $this->name,
             'address' => $this->address,
             'time' => $this->time,
+            'description' => $this->description,
             'categories' => CategoryResourse::collection($this->categories),
             'organizers' => OrganizerResourse::collection($this->organizers),
             'tickets' => TicketResourse::collection($this->tickets),

@@ -27,6 +27,7 @@ class EventUpdateRequest extends FormRequest
             'name' => 'sometimes|string|min:8|max:50',
             'address' => 'sometimes|string|min:8|max:50',
             'time' => 'sometimes|date|date_format:Y-m-d|after:today',
+            'description' => 'sometimes|string|min:1|max:200',
             'category' => 'sometimes|array|min:1',
             'category.*' => 'integer|exists:categories,id|required_with:category',
             'organizer' => 'sometimes|array|min:1',
@@ -44,6 +45,7 @@ class EventUpdateRequest extends FormRequest
                 'name' => $this->name,
                 'address' => $this->address,
                 'time' => $this->time,
+                'description' => $this->description,
             ]);
             $this->event->categories()->sync($this->category);
             $this->event->organizers()->sync($this->organizer);

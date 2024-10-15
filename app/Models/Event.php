@@ -15,6 +15,7 @@ class Event extends Model
         'name',
         'address',
         'time',
+        'description',
     ];
 
     public function tickets()

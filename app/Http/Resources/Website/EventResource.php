@@ -24,6 +24,7 @@ class EventResource extends JsonResource
             'image' => ImageResource::make($this->image),
             'address' => $this->address,
             'time' => $this->time,
+            'description' => $this->description,
         ];
     }
 }

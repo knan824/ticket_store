@@ -27,6 +27,7 @@ class EventStoreRequest extends FormRequest
             'name' => 'required|string|min:8|max:50',
             'address' => 'required|string|min:8|max:50',
             'time' => 'required|date|date_format:Y-m-d|after:today',
+            'description' => 'required|string|min:1|max:200',
             'category' => 'required|array|min:1',
             'category.*' => 'integer|exists:categories,id|required_with:category',
             'organizer' => 'required|array|min:1',
