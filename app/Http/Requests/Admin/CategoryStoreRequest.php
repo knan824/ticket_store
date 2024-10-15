@@ -24,11 +24,12 @@ class CategoryStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:2|max:50',
+            'name' => 'required|string|min:2|max:50|unique:categories,name',
         ];
     }
 
-    public function storeCategory(){
+    public function storeCategory()
+    {
         return DB::transaction(function () {
             $category = Category::create($this->validated());
 

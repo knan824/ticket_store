@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ticket_id');
-            $table->uuid('serial_number');
+            $table->unsignedBigInteger('purchase_id');
+            $table->string('serial_number');
             $table->timestamps();
         });
     }

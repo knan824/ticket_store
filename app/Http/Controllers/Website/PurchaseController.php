@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\PurchaseResource;
+use App\Http\Requests\Website\PurchaseStoreRequest;
+use App\Http\Resources\Website\PurchaseResource;
 use App\Models\Purchase;
 
 class PurchaseController extends Controller
@@ -13,7 +14,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::paginate();
+        $purchases = auth()->user()->purchases()->paginate();
 
         return PurchaseResource::collection($purchases);
     }
@@ -29,14 +30,15 @@ class PurchaseController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Store a newly created resource in storage.
      */
-    public function destroy(Purchase $purchase)
+    public function store(PurchaseStoreRequest $request)
     {
-        $purchase->delete();
+        $purchase = $request->storePurchase();
 
         return response([
-            'message' => 'Purchase deleted successfully'
+            'purchase' => new PurchaseResource($purchase['purchase']),
+            'message' => $purchase['success'] ? 'Purchase created successfully' : 'Purchase failed',
         ]);
     }
 }

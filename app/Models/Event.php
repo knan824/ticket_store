@@ -10,12 +10,11 @@ class Event extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'name',
+        'description',
         'address',
         'time',
-        'description',
     ];
 
     public function tickets()
@@ -36,6 +35,11 @@ class Event extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'mediable');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
     public function remove()

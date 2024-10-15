@@ -30,7 +30,8 @@ class TicketStoreRequest extends FormRequest
         ];
     }
 
-    public function storeTicket(){
+    public function storeTicket()
+    {
         return DB::transaction(function () {
             $ticket = Ticket::create($this->validated());
 

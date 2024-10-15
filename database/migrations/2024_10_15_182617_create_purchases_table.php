@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->uuid("serial_number");
+            $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("ticket_id");
+            $table->unsignedInteger("quantity");
+            $table->string("transaction_number");
             $table->boolean("is_paid");
+            $table->timestamps();
         });
     }
 

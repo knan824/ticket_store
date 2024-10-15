@@ -12,7 +12,7 @@ class TicketController extends Controller
 {
     public function __construct()
     {
-    $this->authorizeResource(Ticket::class, 'ticket');
+        $this->authorizeResource(Ticket::class, 'ticket');
     }
 
     /**

@@ -18,6 +18,7 @@ class EventFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'description' => fake()->sentence(),
             'address' => fake()->name(),
             'time' => fake()->date(),
         ];

@@ -9,8 +9,17 @@ class Card extends Model
 {
     use HasFactory;
 
-    public function users(){
-    $this->belongsTo(User::class);
+    protected $fillable = [
+        'user_id',
+        'card_number',
+        'card_holder',
+        'expiry_date',
+        'cvv'
+    ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
     }
 }
 

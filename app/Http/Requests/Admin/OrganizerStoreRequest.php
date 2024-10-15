@@ -29,7 +29,8 @@ class OrganizerStoreRequest extends FormRequest
         ];
     }
 
-    public function storeOrganizer(){
+    public function storeOrganizer()
+    {
         return DB::transaction(function () {
             $organizer = Organizer::create($this->validated());
 
