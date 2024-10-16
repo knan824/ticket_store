@@ -11,7 +11,7 @@ class Purchase extends Model
 
     protected $fillable =[
         'user_id',
-        'event_id',
+        'ticket_id',
         'quantity',
         'transaction_number',
         'is_paid'
@@ -22,8 +22,8 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function event()
+    public function ticket()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Ticket::class);
     }
 }

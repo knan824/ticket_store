@@ -16,7 +16,7 @@ class PurchaseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'event' => new EventResource($this->event),
+            'ticket'=> new TicketResourse($this->ticket),
             'quantity' => $this->quantity,
             'transaction_number' => $this->transaction_number,
             'is_paid' => $this->is_paid,

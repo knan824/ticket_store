@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Website;
 
+use App\Models\Card;
 use App\Models\Event;
 use App\Models\Purchase;
 use App\Models\Ticket;
@@ -35,11 +36,11 @@ class PurchaseStoreRequest extends FormRequest
 
     public function storePurchase()
     {
-        if (! auth()->user->cards->contains($this->card_id)) {
+        if (! auth()->user()->cards()->get()->contains(Card::find($this->card_id))) {
             abort(403, 'You do not own this card');
         }
 
-        if (! Event::find($this->event->id)->quantity >= $this->quantity) {
+        if (! Ticket::find($this->ticket_id)->quantity >= $this->quantity) {
             abort(403, 'Not enough tickets available');
         }
 
@@ -47,7 +48,7 @@ class PurchaseStoreRequest extends FormRequest
 
         $purchase = Purchase::create([
             'user_id' => auth()->id(),
-            'event_id' => $this->event_id,
+            'ticket_id' => $this->ticket_id,
             'card_id' => $this->card_id,
             'quantity' => $this->quantity,
             'transaction_number' => Str::uuid(),
@@ -56,9 +57,8 @@ class PurchaseStoreRequest extends FormRequest
 
         if ($purchase->is_paid) {
             Ticket::find($this->ticket_id)->decrement('quantity', $this->quantity);
-
-            auth()->user()->tickets()->attach([
-                'ticket_id' => $this->ticket_id,
+//     dd($purchase->id);
+            auth()->user()->tickets()->attach($this->ticket_id,[
                 'purchase_id' => $purchase->id,
                 'serial_number' => Str::uuid(),
             ]);
