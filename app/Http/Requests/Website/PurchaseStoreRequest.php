@@ -57,7 +57,7 @@ class PurchaseStoreRequest extends FormRequest
 
         if ($purchase->is_paid) {
             Ticket::find($this->ticket_id)->decrement('quantity', $this->quantity);
-//     dd($purchase->id);
+
             auth()->user()->tickets()->attach($this->ticket_id,[
                 'purchase_id' => $purchase->id,
                 'serial_number' => Str::uuid(),
